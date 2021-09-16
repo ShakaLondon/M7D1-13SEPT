@@ -1,25 +1,43 @@
-import React, { useState } from 'react';
-import { Navbar, Container, NavDropdown, Nav, Button, InputGroup, FormControl } from 'react-bootstrap'
+import React, { useState, useEffect, setState } from 'react';
+import { Navbar, Container, NavDropdown, Nav, Button, InputGroup, FormControl, Row, Col, ListGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
+import { withRouter, Redirect } from 'react-router-dom';
 
-function JobList(props) {
+function ResultList(props) {
+
+    console.log(props.location.search)
+    const searchQ = props.location.search;
+    const params = new URLSearchParams(searchQ);
+    const searchReq = params.get('search');
+    console.log(searchReq)
+
+    const [searchRequest, setSearchRequest] = useState(searchReq);
+    const [searchResult, setSearchResult] = useState(searchReq);
+
+    useEffect(() => {
+        const url =
+        fetch(`${url}${searchRequest}`).then(
+            res => setState(res.data)
+        )
+    })
+
   return (
       <Container className="d-flex" style={{height: "100%"}}>
-        {/* <div> */}
-            <InputGroup className="mb-3">
-                <FormControl
-                placeholder="Type in your ideal job here"
-                aria-label="Job Search Box"
-                aria-describedby="Job Search Box"
-                />
-                <Button variant="outline-secondary" id="button-addon2">
-                Search Jobs
-                </Button>
-            </InputGroup>
-        {/* </div> */}
+        <Row style={{width: "100%"}}>
+            <Col md={12} lg={12}>
+                <ListGroup>
+                    <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                    <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                    <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                    <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                    <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                </ListGroup>
+               
+            </Col>
+        </Row>
       </Container>
   );
 }
 
-export default JobList;
+export default withRouter(ResultList);
