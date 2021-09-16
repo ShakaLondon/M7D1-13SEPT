@@ -5,7 +5,7 @@ import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
 
 function NavJobs(props) {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="fixed-top">
       <Container fluid className="mx-0 d-flex justify-content-between">
         {/* <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -4,20 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
 import { withRouter, Redirect, Link } from 'react-router-dom';
 
-function ResultList(props) {
+function CompanyJobs(props) {
 
     console.log(props.location.search)
     const searchQ = props.location.search;
     const params = new URLSearchParams(searchQ);
-    const searchReq = params.get('search');
+    const searchReq = params.get('jobs');
     console.log(searchReq)
 
     const [searchRequest, setSearchRequest] = useState(searchReq);
     const [searchResult, setSearchResult] = useState([]);
-  
+    const [searchCompanyJobs, setSearchCompanyJobs] = useState(null);
 
     useEffect(() => {
-        const url = `https://strive-jobs-api.herokuapp.com/jobs?search=`
+        const url = `https://strive-jobs-api.herokuapp.com/jobs?company=`
         const options = {
             method: 'GET',
             headers: {
@@ -46,6 +46,7 @@ function ResultList(props) {
       <Container fluid className="d-flex" style={{ height: "100%", width: "80vw", marginTop: "100px" }}>
         <Row style={{width: "100%"}}>
             <Col md={12} lg={12}>
+                <h2 className="my-3 pl-4">{`Search Results for company: '${searchReq}'`}</h2>
                 <ListGroup>
                     
                     { searchResult ? (
@@ -84,4 +85,4 @@ function ResultList(props) {
   );
 }
 
-export default withRouter(ResultList);
+export default withRouter(CompanyJobs);
