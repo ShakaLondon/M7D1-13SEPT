@@ -46,6 +46,7 @@ function ResultList(props) {
       <Container fluid className="d-flex" style={{ height: "100%", width: "80vw", marginTop: "100px" }}>
         <Row style={{width: "100%"}}>
             <Col md={12} lg={12}>
+            <h2 className="my-3 pl-4">{`Search Results for '${searchReq}'`}</h2>
                 <ListGroup>
                     
                     { searchResult ? (
@@ -59,8 +60,8 @@ function ResultList(props) {
                                     <Card style={{ width: '100%', height: '400px' }}>
                                         <Card.Body>
                                         <Card.Title style={{ fontSize: '25px' }} className="py-2">{job.title}</Card.Title>
-                                        <Link className="py-2 mb-3" to={`/Company?jobs=${job.company_name}`} >{job.company_name}</Link>
-                                            <Card style={{ width: '100%' }}>
+                                        <Link className="py-3 my-4" to={`/Company?jobs=${job.company_name}`} >{job.company_name}</Link>
+                                            <Card style={{ width: '100%' }} className="mt-4">
                                             <Card.Body className="overflow-auto">
                                                     <Card.Text dangerouslySetInnerHTML={{
                                                                 __html: descripParent

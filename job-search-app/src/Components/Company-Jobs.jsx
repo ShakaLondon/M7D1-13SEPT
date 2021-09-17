@@ -17,14 +17,14 @@ function CompanyJobs(props) {
     const [searchCompanyJobs, setSearchCompanyJobs] = useState(null);
 
     useEffect(() => {
-        const url = `https://strive-jobs-api.herokuapp.com/jobs?company=`
+        const url = searchReq ? `https://strive-jobs-api.herokuapp.com/jobs?company=${searchRequest}` : `https://strive-jobs-api.herokuapp.com/jobs?limit=10&skip=10 `
         const options = {
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGIwZGZiYmRjMTQ1ODAwMTVlNGFlZTUiLCJpYXQiOjE2MzE3NzI3MTIsImV4cCI6MTYzMjk4MjMxMn0.2YWhQrKLUrKnO_spK_yPMr-orqdslBjHVr-zMEUyYPk'
             }
         }
-        fetch(`${url}${searchRequest}`, options)
+        fetch(`${url}`, options)
         .then(res => res.json())
         .then((jobs) => {
             console.log(jobs.data)
@@ -46,7 +46,7 @@ function CompanyJobs(props) {
       <Container fluid className="d-flex" style={{ height: "100%", width: "80vw", marginTop: "100px" }}>
         <Row style={{width: "100%"}}>
             <Col md={12} lg={12}>
-                <h2 className="my-3 pl-4">{`Search Results for company: '${searchReq}'`}</h2>
+                <h2 className="my-3 pl-4">{searchReq ? `Search Results for company: '${searchReq}'` : `Current Vacancies`}</h2>
                 <ListGroup>
                     
                     { searchResult ? (
@@ -60,8 +60,8 @@ function CompanyJobs(props) {
                                     <Card style={{ width: '100%', height: '400px' }}>
                                         <Card.Body>
                                         <Card.Title style={{ fontSize: '25px' }} className="py-2">{job.title}</Card.Title>
-                                        <Link className="py-2 mb-3" to={`/Company?jobs=${job.company_name}`} >{job.company_name}</Link>
-                                            <Card style={{ width: '100%' }}>
+                                        <Link className="py-3 my-3" to={`/Company?jobs=${job.company_name}`} >{job.company_name}</Link>
+                                            <Card style={{ width: '100%' }} className="mt-4">
                                             <Card.Body className="overflow-auto">
                                                     <Card.Text dangerouslySetInnerHTML={{
                                                                 __html: descripParent

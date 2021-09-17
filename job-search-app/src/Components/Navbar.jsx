@@ -11,8 +11,8 @@ function NavJobs(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-0 d-inline-flex">
-            <Nav.Link href="#home" className="text-dark font-weight-bold">About</Nav.Link>
-            <Nav.Link href="#link" className="text-dark font-weight-bold">Store</Nav.Link>
+            <Nav.Link href="/Search" className="text-dark font-weight-bold">Search</Nav.Link>
+            <Nav.Link href="/Company" className="text-dark font-weight-bold">Jobs</Nav.Link>
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="text-dark font-weight-bold">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
