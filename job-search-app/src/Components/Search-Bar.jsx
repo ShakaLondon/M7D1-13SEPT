@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { Navbar, Container, NavDropdown, Nav, Button, InputGroup, FormControl, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter, Redirect, useHistory } from 'react-router-dom';
 
 
 function SearchJobs(props) {
+
+  let history = useHistory()
 
     const [searchQuery, setSearchQuery] = useState("");
 
     const handleSubmit= (e) => {
         e.preventDefault();
         // return <Redirect to={`/Results?search=${searchQuery}`}/>
-        props.history.push(`/Results?search=${searchQuery}`)
+        history.push(`/Results?search=${searchQuery}`)
       }
 
       const handleChange= (e) => {
