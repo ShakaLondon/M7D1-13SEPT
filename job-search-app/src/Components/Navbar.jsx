@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar, Container, NavDropdown, Nav, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
+import { withRouter, Redirect, Link, useLocation } from 'react-router-dom';
 
 function NavJobs(props) {
   return (
@@ -11,8 +12,8 @@ function NavJobs(props) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-0 d-inline-flex">
-            <Nav.Link href="/Search" className="text-dark font-weight-bold">Search</Nav.Link>
-            <Nav.Link href="/Company" className="text-dark font-weight-bold">Jobs</Nav.Link>
+            <Link to="/Search" className="text-dark font-weight-bold px-3">Search</Link>
+            <Link to="/Company" className="text-dark font-weight-bold px-3">Jobs</Link>
             {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown" className="text-dark font-weight-bold">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -22,10 +23,10 @@ function NavJobs(props) {
             </NavDropdown> */}
           </Nav>
           <Nav className="ml-auto mr-0 d-inline-flex align-items-center">
-            <Nav.Link href="#home" className="text-dark font-weight-bold">Gmail</Nav.Link>
-            <Nav.Link href="#link" className="text-dark font-weight-bold">Images</Nav.Link>
-            <Nav.Link href="#link" className="text-dark font-weight-bold"><FontAwesomeIcon icon={faGripHorizontal}/></Nav.Link>
-            <Nav.Link href="#link" className="text-dark font-weight-bold"><Button className="btn btn-primary btn-circle btn-md">S</Button></Nav.Link>
+            <Link className="text-dark font-weight-bold px-3" to="/Favourites">Favourites</Link>
+            {/* <Nav.Link href="#link" className="text-dark font-weight-bold">Images</Nav.Link> */}
+            <Nav.Link href="#link" className="text-dark font-weight-bold px-3"><FontAwesomeIcon icon={faGripHorizontal}/></Nav.Link>
+            <Nav.Link href="#link" className="text-dark font-weight-bold px-3"><Button className="btn btn-primary btn-circle btn-md">S</Button></Nav.Link>
             
           </Nav>
         </Navbar.Collapse>

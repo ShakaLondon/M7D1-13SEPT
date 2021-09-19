@@ -1,13 +1,14 @@
 import React, { useState, useEffect, setState } from 'react';
 import { Navbar, Container, NavDropdown, Nav, Button, InputGroup, FormControl, Row, Col, ListGroup, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
+import { faGripHorizontal, faStar } from '@fortawesome/free-solid-svg-icons'
 import { withRouter, Redirect, Link, useLocation } from 'react-router-dom';
 import { connect } from "react-redux";
-import { fetchResultsAction } from "../Redux/Actions/index";
+import { fetchResultsAction, addToFavAction, removeFromFavAction } from "../Redux/Actions/index";
 
 
 const mapStateToProps = (state) => ({
+    favouriteJobs: state.favourites.jobs,
     jobList: state.search.allJobs,
     searchRes: state.search.searchResults,
     error: state.search.error,
@@ -17,16 +18,20 @@ const mapStateToProps = (state) => ({
   const mapDispatchToProps = (dispatch) => ({
     //functions
     fetchSearchResults: (query, searchType) => dispatch(fetchResultsAction(query, searchType)),
+    addToFavList: (query) => dispatch(addToFavAction(query)),
+    removeFromFavList: (query) => dispatch(removeFromFavAction(query)),
   });
   
   
 const CompanyJobs = ({
+    favouriteJobs,
     jobList,
     searchRes,
     error,
     loading,
-    location,
-    fetchSearchResults
+    fetchSearchResults,
+    addToFavList,
+    removeFromFavList,
 }) => {
 
     let locationUrl = useLocation();
@@ -69,7 +74,7 @@ const CompanyJobs = ({
     //     props.history.push(`/Results?company=${e.target.value}`)
     //   }
 
-    const roleSearch = searchReq ? "company" : "limit=10&" 
+    const roleSearch = searchReq ? "company" : "limit=10&"
 
     const searchReqQuery = searchReq ? searchReq : "skip=10" 
 
@@ -97,7 +102,15 @@ const CompanyJobs = ({
                             <ListGroup.Item className="border-0" key={job._id} >
                                     <Card style={{ width: '100%', height: '400px' }}>
                                         <Card.Body>
-                                        <Card.Title style={{ fontSize: '25px' }} className="py-2">{job.title}</Card.Title>
+                                        <Card.Title style={{ fontSize: '25px' }} className="py-2 d-flex justify-content-between">
+                                            <div className="d-flex">{job.title}</div>
+                                            {favouriteJobs.includes(job) ? <div className="d-flex btn btn-light text-danger" onClick={()=> removeFromFavList(job)}>
+                                                                                        <FontAwesomeIcon icon={faStar}/>
+                                                                                    </div> :
+                                                                                    <div className="d-flex btn btn-light" onClick={()=> addToFavList(job)}>
+                                                                                        <FontAwesomeIcon icon={faStar}/>
+                                                                                    </div>}
+                                        </Card.Title>
                                         <Link className="py-3 my-3" to={`/Company?jobs=${job.company_name}`} >{job.company_name}</Link>
                                             <Card style={{ width: '100%' }} className="mt-4">
                                             <Card.Body className="overflow-auto">
@@ -124,7 +137,15 @@ const CompanyJobs = ({
                                     <ListGroup.Item className="border-0" key={job._id} >
                                             <Card style={{ width: '100%', height: '400px' }}>
                                                 <Card.Body>
-                                                <Card.Title style={{ fontSize: '25px' }} className="py-2">{job.title}</Card.Title>
+                                                <Card.Title style={{ fontSize: '25px' }} className="py-2 d-flex justify-content-between">
+                                            <div className="d-flex">{job.title}</div>
+                                            {favouriteJobs.includes(job) ? <div className="d-flex btn btn-light text-danger" onClick={()=> removeFromFavList(job)}>
+                                                                                        <FontAwesomeIcon icon={faStar}/>
+                                                                                    </div> :
+                                                                                    <div className="d-flex btn btn-light" onClick={()=> addToFavList(job)}>
+                                                                                        <FontAwesomeIcon icon={faStar}/>
+                                                                                    </div>}
+                                        </Card.Title>
                                                 <Link className="py-3 my-3" to={`/Company?jobs=${job.company_name}`} >{job.company_name}</Link>
                                                     <Card style={{ width: '100%' }} className="mt-4">
                                                     <Card.Body className="overflow-auto">

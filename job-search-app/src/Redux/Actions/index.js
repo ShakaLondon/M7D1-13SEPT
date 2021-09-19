@@ -79,12 +79,12 @@ export const fetchResultsAction = (query, searchType) => {
   };
 };
 
-export const addToFavAction = (song) => ({
+export const addToFavAction = (query) => ({
   type: "ADD_TO_FAV",
-  payload: song,
+  payload: query,
 });
 
-export const removeFromFavAction = (song) => ({
+export const removeFromFavAction = (query) => ({
   type: "REMOVE_FROM_FAV",
-  payload: song,
+  payload: query,
 });

@@ -12,21 +12,17 @@ function App() {
   return (
     <Provider store={configureStore}>
       <div style={{height: "100vh"}}>
-        <NavJobs/>
+        
         <BrowserRouter>
+        <NavJobs/>
           <Switch>
-              <Route exact path="/Search">
-                <SearchJobs/>
-              </Route>
+              <Route exact path="/Search" component={SearchJobs}/>
               <Route exact path="/">
                 <Redirect to="/Search"/>
               </Route>
-              <Route exact path="/Results">
-                <ResultList/>
-              </Route>
-              <Route exact path="/Company">
-                <CompanyJobs/>
-              </Route>
+              <Route exact path="/Results" component={ResultList}/>
+              <Route exact path="/Company" component={CompanyJobs}/>
+              <Route exact path="/Favourites" component={ResultList}/>
           </Switch>
         </BrowserRouter>
       </div>

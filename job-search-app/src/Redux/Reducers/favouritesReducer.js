@@ -15,7 +15,7 @@ const favouritesReducer = (state = initialState.favourites, action) => {
         ...state,
         jobs: 
           state.jobs.filter(
-            (l) => l.id !== action.payload.id 
+            (l) => l._id !== action.payload._id 
           )
         // Replacing state as an Array from filter
       }
