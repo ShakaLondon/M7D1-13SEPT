@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Container, NavDropdown, Nav, Button, Dropdown, DropdownButton, InputGroup, FormControl } from 'react-bootstrap'
+import { Navbar, Container, NavDropdown, Nav, Button, Dropdown, DropdownButton, InputGroup, FormControl, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGripHorizontal } from '@fortawesome/free-solid-svg-icons'
 import { withRouter, Redirect, Link, useLocation } from 'react-router-dom';
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSearchResults: (query, searchType) => dispatch(fetchResultsAction(query, searchType)),
   addToFavList: (query) => dispatch(addToFavAction(query)),
   removeFromFavList: (query) => dispatch(removeFromFavAction(query)),
-  setUser: (query) => dispatch(setUsernameAction(query)),
+  setUser: (name) => dispatch(setUsernameAction(name)),
 });
 
 
@@ -35,9 +35,11 @@ const NavJobs = ({
   fetchSearchResults,
   addToFavList,
   removeFromFavList,
+  setUser,
 }) => {
 
   const [openNav, setOpenNav] = useState(false);
+  const [user, logUser] = useState(null)
 
   return (
     <Navbar bg="light" expand="lg" className="fixed-top d-block">
@@ -61,7 +63,7 @@ const NavJobs = ({
             {/* <Nav.Link href="#link" className="text-dark font-weight-bold">Images</Nav.Link> */}
             <Nav.Link href="#link" className="text-dark font-weight-bold px-3"><FontAwesomeIcon icon={faGripHorizontal}/></Nav.Link>
             <Nav.Link href="#link" className="text-dark font-weight-bold px-3" onClick={() => setOpenNav(!openNav)}>
-              {userName !== '' ? <Button className="btn btn-primary btn-circle btn-md">{userName.charAt(0)}</Button> : <img src="http://romanroadtrust.co.uk/wp-content/uploads/2018/01/profile-icon-png-898.png" className="btn-circle btn-md bg-dark"/> }
+              {userName !== '' ? <Button className="btn btn-primary btn-circle btn-md">{userName?.charAt(0)}</Button> : <img src="http://romanroadtrust.co.uk/wp-content/uploads/2018/01/profile-icon-png-898.png" className="btn-circle btn-md bg-dark"/> }
               </Nav.Link>
             
           </Nav>
@@ -85,20 +87,29 @@ const NavJobs = ({
           <Nav className="ml-auto mr-0 d-inline-flex align-items-center">
           { userName != '' ? 
           <div className="d-flex align-items-center">
-            <h5 className="mb-0">{`You are logged in as `}</h5>
-            <h6 className="text-bold text-underline">{userName?.toUpperCase()}</h6>
-            <Button variant="outline-secondary">Log Out</Button>
+            <h5 className="mb-0 px-2">{`You are logged in as `}</h5>
+            <h4 className="mb-0 text-bold text-underline">{userName?.toUpperCase()}</h4>
+            <Button variant="outline-secondary mx-2" onClick={e => setUser("")}>Log Out</Button>
           </div>
-          : <InputGroup>
+          : 
+          <Form >
+            <InputGroup>
             <FormControl
               placeholder="Username"
               aria-label="Recipient's username with two button addons"
               className="border-right-0"
+              onChange={(e) => {logUser(e.target.value); console.log(e.target.value)}}
+              aria-describedby="loginform"
+              type="text"
               
             />
-            <Button variant="outline-secondary rounded-0">Log In</Button>
-            <Button variant="outline-secondary btn-end border-left-0">Sign Up</Button>
-          </InputGroup> }
+            <InputGroup.Append>
+            <Button variant="outline-secondary rounded-0" id="loginform" type="button" onClick={e => setUser(user)}>Log In</Button>
+            <Button variant="outline-secondary btn-end border-left-0" type="button" onClick={e => setUser(user)}>Sign Up</Button>
+            </InputGroup.Append>
+          </InputGroup>
+          </Form> 
+        }
             {/* <Nav.Link href="#link" className="text-dark font-weight-bold">Images</Nav.Link> */}
 
             {/* <Nav.Link href="#link" className="text-dark font-weight-bold pl-3">
