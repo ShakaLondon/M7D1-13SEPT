@@ -49,3 +49,7 @@
 .navbar-space {
   margin-top: "100px"
 }
+
+.btn-end {
+  border-radius: 0px 3px 3px 0px !important;
+}

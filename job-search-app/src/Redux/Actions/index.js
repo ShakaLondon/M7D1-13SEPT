@@ -88,3 +88,8 @@ export const removeFromFavAction = (query) => ({
   type: "REMOVE_FROM_FAV",
   payload: query,
 });
+
+export const setUsernameAction = (name) => ({
+  type: 'SET_USERNAME',
+  payload: name,
+})

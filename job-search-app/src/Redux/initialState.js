@@ -8,6 +8,9 @@ const initialState = {
     loading: false,
     error: false,
   },
+  user: {
+    firstName: ''
+  }
 }
 
 export default initialState
